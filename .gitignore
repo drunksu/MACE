@@ -161,3 +161,6 @@ Thumbs.db
 
 # Benchmark datasets (large files)
 BenchmarkDatasets/
+
+demand.txt
+main.tex
