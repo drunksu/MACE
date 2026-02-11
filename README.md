@@ -279,8 +279,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <div align="center">
   <p>Built with ❤️ by the MACE-RL Team</p>
   <p>
-    <a href="https://github.com/your-org/mace-rl">GitHub</a> •
-    <a href="https://arxiv.org/abs/XXXX.XXXXX">Paper</a> •
-    <a href="https://twitter.com/macerl">Twitter</a>
+    <a href="https://github.com/drunksu/mace-rl">GitHub</a>
   </p>
 </div>
