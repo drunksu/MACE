@@ -1,0 +1,71 @@
+# VerL integration configuration for MACE-RL
+
+# Environment
+environment:
+  num_envs: 8
+  max_steps: 1000
+  reward_params:
+    alpha: 0.1
+    eta: 0.01
+    psi: 0.001
+  manifold_constraint: false
+  manifold_checkpoint: "checkpoints/flows/best_model.pt"
+
+# Policy
+policy:
+  state_dim: 64  # should match processed data
+  action_dim: 1
+  latent_dim: 16
+  hidden_dim: 256
+  num_layers: 3
+  flow_num_transforms: 8
+  flow_hidden_dim: 128
+  residual_hidden_dim: 128
+  use_residual: true
+  use_manifold_projection: false
+  log_std_min: -5.0
+  log_std_max: 2.0
+
+# GRPO algorithm (DeepSeek style: no value network)
+algorithm:
+  name: "GRPO"
+  group_size: 4  # number of candidate actions per state
+  normalize_advantage: true  # normalize by std within group
+  gamma: 0.99  # discount factor for returns
+  clip_range: 0.2
+  entropy_coef: 0.01
+  kl_penalty_weight: 0.0  # weight for KL divergence penalty toward reference policy
+  max_grad_norm: 0.5
+
+# Training
+training:
+  total_timesteps: 1_000_000
+  batch_size: 64
+  num_epochs: 10
+  learning_rate: 3e-4
+  optimizer: "Adam"
+  scheduler: "CosineAnnealingLR"
+  scheduler_params:
+    T_max: 1000
+  checkpoint_freq: 50000
+  log_freq: 100
+  eval_freq: 10000
+  n_eval_episodes: 10
+  seed: 42
+
+# Data
+data:
+  train_path: "data/processed/train.parquet"
+  test_path: "data/processed/test.parquet"
+  state_prefix: "state_"
+  action_column: "action"
+  num_trajectories: 1000
+  trajectory_length: 100
+
+# Logging
+logging:
+  log_dir: "logs/verl"
+  tensorboard: true
+  wandb: false
+  wandb_project: "mace-rl"
+  wandb_entity: ""

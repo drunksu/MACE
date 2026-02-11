@@ -1,0 +1,6 @@
+# Minimal dependencies for VerL core
+torch>=2.0.0
+tensordict>=0.10.0
+ray>=2.10.0
+omegaconf>=2.3.0
+numpy>=1.19.5

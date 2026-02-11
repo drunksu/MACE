@@ -1,0 +1,39 @@
+# Conditional normalizing flow configuration
+model:
+  name: "ConditionalRealNVP"
+  input_dim: 1  # action dimension (e.g., execution rate)
+  context_dim: 64  # dimension of state representation
+  num_transforms: 8
+  hidden_dim: 128
+  num_blocks: 2
+  dropout: 0.0
+  use_batch_norm: true
+
+training:
+  batch_size: 256
+  epochs: 1000
+  learning_rate: 1e-3
+  optimizer: "Adam"
+  scheduler:
+    name: "CosineAnnealingLR"
+    T_max: 1000
+  early_stopping_patience: 50
+  validation_split: 0.1
+
+data:
+  dataset_path: "data/processed/train.parquet"
+  state_columns: "state_"  # prefix for state features
+  action_column: "action"  # column name for actions (if available, else synthetic)
+  synthetic_action: true   # generate synthetic feasible actions from expert trajectories
+
+checkpoint:
+  save_dir: "checkpoints/flows"
+  save_freq: 10
+  best_only: true
+
+logging:
+  log_dir: "logs/flows"
+  tensorboard: true
+  wandb: false
+  wandb_project: "mace-rl"
+  wandb_entity: ""
