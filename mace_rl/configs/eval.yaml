@@ -1,0 +1,35 @@
+# Evaluation configuration
+evaluation:
+  dataset_path: "data/processed/test.parquet"
+  n_episodes: 100
+  seed: 42
+
+baselines:
+  - name: "TWAP"
+    params: {}
+  - name: "VWAP"
+    params: {}
+  - name: "AlmgrenChriss"
+    params:
+      risk_aversion: 0.1
+      temporary_impact: 0.01
+      permanent_impact: 0.001
+  - name: "CQL"
+    checkpoint: "checkpoints/rl/cql_best.pt"
+  - name: "IQL"
+    checkpoint: "checkpoints/rl/iql_best.pt"
+  - name: "TD3_BC"
+    checkpoint: "checkpoints/rl/td3_bc_best.pt"
+
+metrics:
+  - "execution_cost"
+  - "slippage"
+  - "impact"
+  - "variance"
+  - "sharpe_ratio"
+  - "max_drawdown"
+
+output:
+  save_dir: "results"
+  plots: true
+  report_format: "latex"  # latex, markdown, html

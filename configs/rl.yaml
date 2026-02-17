@@ -1,0 +1,57 @@
+# Reinforcement learning training configuration
+environment:
+  name: "ExecutionEnv"
+  dataset_path: "data/processed/train.parquet"
+  state_dim: 64
+  action_dim: 1
+  max_steps: 1000
+  reward_function: "implementation_shortfall"
+  reward_params:
+    alpha: 0.1  # risk aversion
+    eta: 0.01   # temporary impact coefficient
+  manifold_constraint: true
+  manifold_checkpoint: "checkpoints/flows/best_model.pt"
+
+policy:
+  name: "ManifoldConstrainedPolicy"
+  network: "MLP"
+  hidden_sizes: [256, 256]
+  activation: "ReLU"
+  use_ensemble: true
+  ensemble_size: 5
+  uncertainty_penalty: 0.1
+
+algorithm:
+  name: "PPO"  # or GRPO, CQL, IQL
+  # PPO specific
+  learning_rate: 3e-4
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.01
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  # Conservative Q-learning specific (if algorithm == CQL)
+  cql_alpha: 1.0
+  temperature: 1.0
+
+training:
+  total_timesteps: 1_000_000
+  log_interval: 100
+  eval_freq: 10000
+  n_eval_episodes: 10
+  save_freq: 50000
+
+checkpoint:
+  save_dir: "checkpoints/rl"
+  best_only: true
+
+logging:
+  log_dir: "logs/rl"
+  tensorboard: true
+  wandb: false
+  wandb_project: "mace-rl"
+  wandb_entity: ""
