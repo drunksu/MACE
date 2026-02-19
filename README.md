@@ -42,7 +42,7 @@ MACE-RL (Microstructure-Aware Conservative Execution via Reinforcement Learning)
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/mace-rl.git
+git clone https://github.com/drunksu/mace-rl.git
 cd mace-rl
 
 # Create and activate a virtual environment

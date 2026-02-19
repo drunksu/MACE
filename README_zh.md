@@ -42,7 +42,7 @@ MACE-RL（基于强化学习的微结构感知保守执行）是一个面向金�
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-org/mace-rl.git
+git clone https://github.com/drunksu/mace-rl.git
 cd mace-rl
 
 # 创建并激活虚拟环境
