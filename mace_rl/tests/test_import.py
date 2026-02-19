@@ -4,7 +4,7 @@ Test that modules can be imported.
 
 def test_import():
     import mace_rl
-    import mace_rl.data.fi2010
+    import mace_rl.data_process.fi2010
     import mace_rl.features.microstructure
     import mace_rl.environment.execution_env
     import mace_rl.models.flows

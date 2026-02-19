@@ -14,7 +14,7 @@ from torch.optim.lr_scheduler import CosineAnnealingLR
 
 from mace_rl.utils.config import load_config
 from mace_rl.utils.logging import setup_logging
-from mace_rl.data.dataset import create_data_loaders
+from mace_rl.data_process.dataset import create_data_loaders
 from mace_rl.models.flows import ConditionalRealNVP
 from mace_rl.training.flow_trainer import FlowTrainer
 

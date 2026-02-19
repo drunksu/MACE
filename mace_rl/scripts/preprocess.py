@@ -8,7 +8,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 import argparse
-from mace_rl.data.preprocess import preprocess
+from mace_rl.data_process.preprocess import preprocess
 from mace_rl.utils.config import load_config
 from mace_rl.utils.logging import setup_logging
 
